@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marco & Sebas | Vault</title>
+    <title>Proyectos Personales | Vault</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -35,37 +34,32 @@
 
 <body class="text-slate-100 min-h-screen relative pb-12">
 
-    <div class="absolute top-0 left-1/4 w-96 h-96 glow-bg pointer-events-none blur-3xl animate-pulse duration-4000">
-    </div>
-    <div
-        class="absolute bottom-10 right-1/4 w-96 h-96 glow-bg pointer-events-none blur-3xl animate-pulse duration-3000">
-    </div>
+    <div class="absolute top-0 left-1/4 w-96 h-96 glow-bg pointer-events-none blur-3xl animate-pulse duration-4000"></div>
+    <div class="absolute bottom-10 right-1/4 w-96 h-96 glow-bg pointer-events-none blur-3xl animate-pulse duration-3000"></div>
 
     <header class="max-w-5xl mx-auto pt-10 px-6 flex justify-between items-center relative z-10">
         <div class="flex items-center gap-3">
-            <div
-                class="h-10 w-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+            <div class="h-10 w-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                 <span class="material-symbols-rounded text-white">folder_shared</span>
             </div>
-            <h1
-                class="text-2xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
-                MARCO <span class="text-slate-500 font-light">&</span> SEBAS
+            <h1 class="text-2xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                TRIO <span class="text-slate-500 font-light">DEV</span>
             </h1>
         </div>
-        <span
-            class="text-xs font-semibold uppercase tracking-widest bg-slate-800 px-4 py-2 rounded-full border border-slate-700 text-indigo-400">JSON
-            Vault</span>
+        <span class="text-xs font-semibold uppercase tracking-widest bg-slate-800 px-4 py-2 rounded-full border border-slate-700 text-indigo-400">
+            JSON Vault
+        </span>
     </header>
 
     <main class="max-w-5xl mx-auto px-6 mt-16 relative z-10">
         <div class="flex justify-between items-center mb-8">
-            <h3 class="text-xl font-bold tracking-wide">Marcadores Compartidos</h3>
-            <span id="counter"
-                class="text-xs bg-indigo-950 text-indigo-400 border border-indigo-800/60 px-3 py-1 rounded-md font-mono">Cargando...</span>
+            <h3 class="text-xl font-bold tracking-wide">Proyectos Compartidos</h3>
+            <span id="counter" class="text-xs bg-indigo-950 text-indigo-400 border border-indigo-800/60 px-3 py-1 rounded-md font-mono">
+                Cargando...
+            </span>
         </div>
 
-        <div id="linksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        </div>
+        <div id="linksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
     <script>
@@ -74,12 +68,11 @@
             const counter = document.getElementById('counter');
 
             try {
-                // Fetch directo a tu archivo enlaces.json
                 const response = await fetch('enlaces.json');
                 const data = await response.json();
 
                 grid.innerHTML = '';
-                counter.innerText = `${data.links.length} Links`;
+                counter.innerText = `${data.links.length} Proyectos`;
 
                 data.links.forEach((link, index) => {
                     const card = document.createElement('div');
@@ -88,16 +81,25 @@
                     let displayUrl = link.url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").substring(0, 28);
                     if (link.url.length > 28) displayUrl += '...';
 
+                    // Colores por etiquetas para 3 amigos
+                    let tagClass = 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'; // Tercer amigo
+                    const user = link.added_by.toLowerCase();
+                    if (user === 'marco') {
+                        tagClass = 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20';
+                    } else if (user === 'sebas') {
+                        tagClass = 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20';
+                    }
+
                     card.innerHTML = `
                         <div>
-                            <div class="flex justify-between items-center mb-2">
+                            <div class="flex justify-between items-center mb-2 gap-2">
                                 <h4 class="font-semibold text-slate-200 group-hover:text-indigo-400 transition-colors truncate w-full">${link.title}</h4>
-                                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md ${link.added_by.toLowerCase() === 'marco' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'}">${link.added_by}</span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md shrink-0 ${tagClass}">${link.added_by}</span>
                             </div>
                             <p class="text-xs text-slate-400 font-mono mb-4 truncate">${displayUrl}</p>
                         </div>
                         <a href="${link.url}" target="_blank" class="mt-4 w-full bg-slate-800/80 hover:bg-indigo-600 border border-slate-700/50 group-hover:border-indigo-500/50 text-slate-300 hover:text-white rounded-xl py-2 px-4 text-xs font-medium transition-all duration-300 flex items-center justify-center gap-1.5 shadow-sm">
-                            Abrir enlace <span class="material-symbols-rounded text-sm transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            Abrir sitio web <span class="material-symbols-rounded text-sm transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </a>
                     `;
 
