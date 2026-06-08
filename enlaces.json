@@ -1,0 +1,25 @@
+{
+    "vault_owner": "Marco & Sebas",
+    "links": [
+        {
+            "title": "YouTube",
+            "url": "https://youtube.com",
+            "added_by": "Marco"
+        },
+        {
+            "title": "GitHub",
+            "url": "https://github.com",
+            "added_by": "Sebas"
+        },
+        {
+            "title": "Animes list",
+            "url": "https://myanimelist.net",
+            "added_by": "Marco"
+        },
+        {
+            "title": "Tailwind CSS",
+            "url": "https://tailwindcss.com",
+            "added_by": "Sebas"
+        }
+    ]
+}
